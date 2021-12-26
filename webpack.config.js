@@ -3,10 +3,12 @@ const { merge } = require('webpack-merge');
 
 const parts = require('./webpack.parts');
 
+const cssLoaders = [parts.autoprefix()];
+
 const commonConfig = merge([
   { entry: ['./src'] },
   parts.page({ title: 'Demo' }),
-  parts.extractCSS(),
+  parts.extractCSS({ loaders: cssLoaders }),
 ]);
 
 const productionConfig = merge([]);
