@@ -1,6 +1,8 @@
 const { WebpackPluginServe } = require('webpack-plugin-serve');
 const { MiniHtmlWebpackPlugin } = require('mini-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const APP_SOURCE = path.join(__dirname, 'src');
 
 exports.devServer = () => ({
   watch: true,
@@ -8,7 +10,7 @@ exports.devServer = () => ({
     new WebpackPluginServe({
       host: '127.0.0.1',
       port: process.env.PORT || 8080,
-      static: "./dist", // Expose if output.path changes
+      static: './dist', // Expose if output.path changes
       liveReload: true,
       waitForBuild: true,
     }),
@@ -55,5 +57,14 @@ exports.autoprefix = () => ({
     postcssOptions: {
       plugins: [require('autoprefixer')()],
     },
+  },
+});
+
+exports.loadJavaScript = () => ({
+  module: {
+    rules: [
+      // Consider extracting include as a parameter
+      { test: /\.js$/, include: APP_SOURCE, use: 'babel-loader' },
+    ],
   },
 });
