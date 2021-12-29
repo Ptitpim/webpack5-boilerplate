@@ -11,6 +11,7 @@ const commonConfig = merge([
   parts.page({ title: 'Demo' }),
   parts.extractCSS({ loaders: cssLoaders }),
   parts.loadJavaScript(),
+  parts.attachRevision(),
 ]);
 
 const productionConfig = merge([]);

@@ -1,8 +1,10 @@
+const webpack = require('webpack');
 const { WebpackPluginServe } = require('webpack-plugin-serve');
 const { MiniHtmlWebpackPlugin } = require('mini-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const APP_SOURCE = path.join(__dirname, 'src');
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 
 exports.devServer = () => ({
   watch: true,
@@ -73,4 +75,12 @@ exports.clean = () => ({
   output: {
     clean: true,
   },
+});
+
+exports.attachRevision = () => ({
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: new GitRevisionPlugin().version(),
+    }),
+  ],
 });
