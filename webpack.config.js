@@ -6,6 +6,7 @@ const parts = require('./webpack.parts');
 const cssLoaders = [parts.autoprefix()];
 
 const commonConfig = merge([
+  parts.clean(),
   { entry: ['./src'] },
   parts.page({ title: 'Demo' }),
   parts.extractCSS({ loaders: cssLoaders }),

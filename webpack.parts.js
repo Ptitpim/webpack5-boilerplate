@@ -68,3 +68,9 @@ exports.loadJavaScript = () => ({
     ],
   },
 });
+
+exports.clean = () => ({
+  output: {
+    clean: true,
+  },
+});
